@@ -1,0 +1,26 @@
+{% extends 'base.html' %} <br />
+{% block title %} Exam Info {% endblock %} <br />
+
+{% block content %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'css/addclass.css' %}" /> <br />
+
+<h1>Exam Info</h1>
+
+{% if examinfo_claases %} <br />
+{% for myin in examinfo_claases %}
+
+<div class="list-group">
+  <a
+    href="{% url 'showclasswork' myin.id %}"
+    class="list-group-item list-group-item-action mt-4"
+    aria-current="true"
+  >
+    {{myin}}
+  </a>
+</div>
+
+{% endfor %} <br />
+
+{% endif %} <br />
+{% endblock %}

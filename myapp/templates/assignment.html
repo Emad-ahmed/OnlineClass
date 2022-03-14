@@ -1,0 +1,27 @@
+{% extends 'base.html' %} <br />
+{% block title %} Assignment {% endblock %} <br />
+
+{% block content %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'css/addclass.css' %}" /> <br />
+
+<h1>Assigmnet</h1>
+
+{% if assign_claases %} <br />
+{% for myin in assign_claases %}
+
+<div class="list-group">
+  <a
+    href="{% url 'showclasswork' myin.id %}"
+    class="list-group-item list-group-item-action mt-5"
+    aria-current="true"
+  >
+    {{myin}}
+  </a>
+</div>
+
+{% endfor %} <br />
+
+{% endif %} <br />
+
+{% endblock %}

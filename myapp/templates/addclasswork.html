@@ -1,0 +1,113 @@
+{% extends 'base.html' %} <br />
+
+{% block title %} Create Class {% endblock %} <br />
+
+{% block content %} <br />
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/addclass.css' %}" />
+<link rel="stylesheet" href="{% static 'css/addclasswork.css' %}" />
+
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    {% if myclass.user == request.user %}
+    <a
+      href="{% url 'addclassworknew' myclass.id  %}"
+      class="float-end myaddwork"
+      >Add Work</a
+    >
+    {% endif %}
+  </li>
+  <li class="nav-item me-5">
+    <a
+      href="#"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      People
+    </a>
+  </li>
+  <li class="nav-item me-5">
+    <a href={% url 'assignment' %}>Assignment</a>
+  </li>
+  <li class="nav-item me-5">
+    <a href="{% url 'presentation' %}">Presentation</a>
+  </li>
+  <li class="nav-item">
+    <a href="{% url 'examinfo' %}">Exam Info</a>
+  </li>
+</ul>
+
+<div class="container mt-3">
+  <div class="jumbotron p-0 m-0 mb-5">
+    <!-- Button trigger modal -->
+
+    <h1 class="ps-5 pt-4">{{myclass.class_name}}</h1>
+    <h1 class="ps-5">{{myclass1.createclass.class_name}}</h1>
+
+    <h5 class="ps-5">{{myclass.section}}</h5>
+    <h5 class="ps-5">{{myclass.createclass.section}}</h5>
+    {% if request.user == myname %}
+    <h5 class="ps-5">Class Code: {{myclass.classcode}}</h5>
+
+    {% endif %}
+  </div>
+  {% for class in addclass %}
+
+  <div class="list-group mt-4">
+    <a
+      href="{% url 'showclasswork' class.id %}"
+      class="list-group-item list-group-item-action"
+      aria-current="true"
+    >
+      {{class.myclass.user.first_name}} {{class.myclass.user.last_name}} Posted
+      A Class Material
+    </a>
+  </div>
+
+  {% endfor %}
+</div>
+
+{% for class in joinclass %}
+<div class="list-group">
+  <a
+    href=""
+    class="list-group-item list-group-item-action mb-4"
+    aria-current="true"
+  >
+    {{request.user}} Is The Class Material
+  </a>
+</div>
+{% endfor %}
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">People</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        {% for myuser in myjoinclass %} {{forloop.counter}} )
+        {{myuser.user.username}} <br />
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

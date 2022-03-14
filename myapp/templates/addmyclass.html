@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Class Work {% endblock %}
+
+{% block content %}  
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/addclass.css' %}">
+
+
+{% if messages %}
+  <ul class="messages list-unstyled ps-4 p-3 text-center bg-success">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<div class="container loginjum p-5">
+
+<form action="" class="text-white" method='POST' enctype="multipart/form-data">
+
+{% csrf_token %}
+
+{% for fm in form %}
+
+{{fm.label_tag}}  {{fm}}  {{fm.errors|striptags}} <br>
+
+
+
+{% endfor %}
+<button type="submit" class='btn btn-info mt-4'>Submit</button>
+
+</form>
+
+
+
+</div>
+
+{% endblock %}

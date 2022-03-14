@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} Signup {% endblock %}
+
+{% block content %}  
+
+<div class="container signupcontainer">
+
+{% if messages %}
+  <ul class="messages list-unstyled ps-4 p-3 text-center bg-warning">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<div class="jumbotron loginjum">
+<form action="" method="post" novalidate>
+{% csrf_token %}
+{% for fm in form %}
+
+{{fm.label_tag}} {{fm}}  {{fm.errors|striptags}}  <br> <br>
+
+{% endfor %}
+
+<button type="submit" class="btn btn-outline-danger text-white">Register</button>
+
+</form>
+
+</div>
+</div>
+
+
+
+{% endblock %}

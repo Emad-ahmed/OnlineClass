@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block title %} Join Class {% endblock %} <br />
+
+{% block content %}
+
+<div class="container signupcontainer">
+  {% if messages %}
+  <ul class="messages list-unstyled ps-4 p-3 text-center bg-success">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <div class="jumbotron">
+    <form action="" method="post" novalidate>
+      {% csrf_token %}
+
+      <input type="text" class="form-control" name="joinclass" />
+
+      <button type="submit" class="btn btn-outline-danger text-dark mt-4">
+        Join Class
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

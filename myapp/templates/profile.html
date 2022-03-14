@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}  
+
+<style>
+#id_user
+{
+    display:none;
+}
+
+</style>
+
+
+
+<div class="container logincontainer">
+
+{% if messages %}
+  <ul class="messages list-unstyled ps-4 p-3 text-center bg-success">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+
+
+<div class="jumbotron loginjum">
+<form action="" method="post" novalidate enctype="multipart/form-data">
+{% csrf_token %}
+{% for fm in form %}
+{{fm.label_tag}} {{fm}}  {{fm.errors|striptags}}  <br> <br>
+{% endfor %}
+<button type="submit" class="btn btn-outline-danger text-white" >Change Profile</button>
+</form>
+</div>
+</div>
+
+
+
+{% endblock %}
