@@ -22,6 +22,10 @@ class PresentationView(View):
     def get(self, request):
 
         n = request.session.get("myid")
+        try:
+            myprofile = ProfileClass.objects.get(user=request.user)
+        except:
+            myprofile = None
 
         createclass = CreateClass.objects.get(pk=n)
         mycl = createclass.class_name
@@ -31,6 +35,7 @@ class PresentationView(View):
 
         my_all_topic_classes = {
             "presentation_claases": present_classes,
+            'myprofile': myprofile
         }
 
         return render(request, "presentation.html", my_all_topic_classes)

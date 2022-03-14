@@ -1,3 +1,4 @@
+from tkinter.messagebox import NO
 from django.http.response import HttpResponseRedirect
 from myapp.models.classname import CreateClass
 from django.shortcuts import render
@@ -12,7 +13,10 @@ class CreateView(View):
         if request.user.is_authenticated:
             my = request.session.get('myteacher')
             fm = CreateClassForm()
-            myprofile = ProfileClass.objects.get(user=request.user)
+            try:
+                myprofile = ProfileClass.objects.get(user=request.user)
+            except:
+                myprofile = None
             return render(request, 'create.html', {'form': fm, 'myprofile': myprofile, 'my': my})
 
         else:

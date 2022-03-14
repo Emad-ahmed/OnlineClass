@@ -48,13 +48,14 @@
             ></a>
             <a href="#"><i class="fas fa-align-justify me-4"></i></a>
 
-            <a href="{% url 'editprofile' %}" class="me-4">My Profile</a>
             <a href="{% url 'logout' %}" class="ms-2">Logout</a>
             {%if not myprofile %}
             <a href="{% url 'profile' %}" class="me-4 ms-4">Add Profile</a>
             {% else%}
             <div class="myprofile">
-              <img src="{{myprofile.myimage.url}}" alt="" />
+              <a href="{% url 'editprofile' %}">
+                <img src="{{myprofile.myimage.url}}" alt=""
+              /></a>
             </div>
             {% endif %} {% else %}
             <a href="{% url 'signup' %}">Signup</a>

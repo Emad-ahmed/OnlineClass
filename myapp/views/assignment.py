@@ -20,11 +20,17 @@ class AssignmentView(View):
         createclass = CreateClass.objects.get(pk=n)
         mycl = createclass.class_name
 
+        try:
+            myprofile = ProfileClass.objects.get(user=request.user)
+        except:
+            myprofile = None
+
         assign_claases = [p for p in AddClassWork.objects.filter(myclass__class_name=mycl) if p.mytopic ==
                           "Assignment"]
 
         my_all_topic_classes = {
             "assign_claases": assign_claases,
+            'myprofile': myprofile
         }
 
         return render(request, "assignment.html", my_all_topic_classes)
