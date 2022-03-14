@@ -28,9 +28,6 @@ class HomeView(View):
         else:
             return HttpResponseRedirect('login')
 
-    def post(self, request):
-        return "Hello"
-
 
 class JoinView(View):
     def get(self, request):

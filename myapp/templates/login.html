@@ -1,43 +1,44 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %} Login {% endblock %}
 
-{% block title %} Login {% endblock %}
+<style></style>
 
-<style>
-
-
-</style>
-
-{% block content %}  
+{% block content %}
 
 <div class="container logincontainer">
-{% if messages %}
+  {% if messages %}
   <ul class="messages list-unstyled ps-4 p-3 text-center bg-success">
     {% for message in messages %}
-      <li class="{{ message.tags }}">{{ message }}</li>
+    <li class="{{ message.tags }}">{{ message }}</li>
     {% endfor %}
   </ul>
-{% endif %}
-<div class="jumbotron loginjum">
-<form action="" method="post" novalidate>
-{% csrf_token %}
-<label for="selected_value">Role</label>
-<select class="form-select" aria-label="Default select example" name='selected_value'>
-  <option value="Teacher">Teacher</option>
-  <option value="Student">Student</option>
-</select> <br> <br>
-{% for fm in form %}
+  {% endif %}
+  <div class="jumbotron loginjum">
+    <form action="" method="post" novalidate>
+      {% csrf_token %}
+      <label for="selected_value">Role</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        name="selected_value"
+      >
+        <option value="Teacher">Teacher</option>
+        <option value="Student">Student</option>
+      </select>
+      <br />
+      <br />
+      {% for fm in form %} {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+      <br />
+      <br />
 
-{{fm.label_tag}} {{fm}}  {{fm.errors|striptags}}  <br> <br>
+      {% endfor %}
 
-{% endfor %}
+      <button type="submit" class="btn btn-outline-danger text-white">
+        Login
+      </button>
 
-<button type="submit" class="btn btn-outline-danger text-white" >Login</button>
-    
-</form>
-
+      <small><a href="{% url 'password_reset' %}">Forgot Password ?</a></small>
+    </form>
+  </div>
 </div>
-</div>
-
-
 
 {% endblock %}

@@ -5,7 +5,9 @@ from django.forms import fields, widgets
 from django.core import validators
 from django.utils.translation import ugettext, ugettext_lazy as _
 from myapp import models
+from django.contrib.auth import password_validation
 from myapp.models import CreateClass, AddClassWork, ProfileClass
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 
 
 class SignForm(UserCreationForm):
@@ -20,12 +22,10 @@ class SignForm(UserCreationForm):
         labels = {'email': "Email"}
 
         widgets = {
-
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-
         }
 
     def clean_email(self):
@@ -34,6 +34,18 @@ class SignForm(UserCreationForm):
             raise forms.ValidationError("Email Already Exists")
 
         return email
+
+
+class MyPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(label=_("Email"), max_length=254, widget=forms.EmailInput(
+        attrs={'autocomplete': 'email', 'class': 'form-control'}))
+
+
+class MySetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(label=_("New Password"), strip=False, widget=forms.PasswordInput(
+        attrs={'autocomplete': 'new-password', 'class': 'form-control'}), help_text=password_validation.password_validators_help_text_html())
+    new_password2 = forms.CharField(label=_("Confirm New Password"), strip=False, widget=forms.PasswordInput(
+        attrs={'autocomplete': 'new-password', 'class': 'form-control'}))
 
 
 class LoginForm(AuthenticationForm):
