@@ -7,3 +7,4 @@ from myapp.views.profile import ProfileView, editprofile
 from myapp.views.assignment import AssignmentView
 from myapp.views.presentation import PresentationView
 from myapp.views.examinfo import ExamInfoView
+from myapp.views.quiz import AddQuizView, Add_Quiz_Question_View

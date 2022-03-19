@@ -1,0 +1,38 @@
+{% extends 'base.html' %} <br />
+{% block title %} Add Quiz Question {% endblock %} <br />
+
+{% block content %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'css/addclass.css' %}" /> <br />
+
+<h1>Add Quiz Question {{mytotal}}</h1>
+
+{% load total_range %} <br />
+
+<div class="container addquizcontainer">
+  {% if messages %}
+  <ul class="messages list-unstyled ps-4 p-3 text-center bg-warning">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <div>
+    <form action="" method="post" novalidate>
+      {% csrf_token %} {% for i in mytotal|times %} <br />
+      {{forloop.counter}} <br />
+      {% for fm in form %} {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+      <br />
+      <br />
+
+      {% endfor %} {% endfor %}
+
+      <button type="submit" class="btn btn-outline-danger text-white">
+        Add Question
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
