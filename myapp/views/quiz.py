@@ -24,33 +24,37 @@ class AddQuizView(View):
         createclass = CreateClass.objects.get(pk=n)
         fm = CourseForm(request.POST)
         if fm.is_valid():
+
             obj = fm.save(commit=False)
-            obj.course = createclass
+            obj.course_name = createclass
             obj.save()
-            mycourse = Course.objects.latest('id')
-            return redirect('add_question', id=mycourse)
+            myid = obj.id
+            return redirect('add_question', id=myid)
         else:
             return render(request, 'add_quiz.html', {'form': fm})
 
 
 class Add_Quiz_Question_View(View):
-    def get(self, request, pk):
+    def get(self, request, id):
         fm = AddQuestionForm()
-        mycourse = Course.objects.get(id=pk)
+        mycourse = Course.objects.get(id=id)
         mytotal = mycourse.question_number
 
         return render(request, "add_quiz_question.html", {'form': fm, 'mytotal': mytotal})
 
-    def post(self, request, course_name):
-        mycourse = Course.objects.get(course_name=course_name)
+    def post(self, request, id):
+        mycourse = Course.objects.get(id=id)
         mymark = mycourse.total_marks
         mytotal = mycourse.question_number
         print(mytotal)
-        fm = AddQuestionForm(request.POST)
+        for i in range(mytotal):
+            fm = AddQuestionForm(request.POST)
+
         if fm.is_valid():
-            obj = fm.save(commit=False)
-            obj.course = mycourse
-            obj.marks = mymark
-            obj.save()
+            for i in range(mytotal):
+                obj = fm.save(commit=False)
+                obj.course = mycourse
+                obj.marks = mymark
+                obj.save()
 
         return render(request, "add_quiz_question.html", {'form': fm, 'mytotal': mytotal})

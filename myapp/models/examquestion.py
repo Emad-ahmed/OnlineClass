@@ -8,9 +8,6 @@ class Course(models.Model):
     question_number = models.PositiveIntegerField()
     total_marks = models.PositiveIntegerField()
 
-    def __str__(self):
-        return self.course_name
-
 
 class Question(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)

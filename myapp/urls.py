@@ -32,7 +32,7 @@ urlpatterns = [
     path('presentation', PresentationView.as_view(), name='presentation'),
     path('examinfo', ExamInfoView.as_view(), name='examinfo'),
     path('add_quiz', AddQuizView.as_view(), name='add_quiz'),
-    path('add_question/<int:pk>/',
+    path('add_question/<int:id>/',
          Add_Quiz_Question_View.as_view(), name='add_question'),
 
     # Password Reset
