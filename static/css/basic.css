@@ -8,6 +8,16 @@ html {
     scroll-behavior: smooth;
 }
 
+.navbar {
+    background: #459C98;
+    padding: 1rem;
+    color: white;
+}
+
+.navbar a {
+    color: white;
+}
+
 .myimg1 {
     width: 30px;
     height: 30px;
@@ -44,17 +54,19 @@ label {
 #classcreate {
     position: absolute;
     width: 12%;
-    background-color: dodgerblue;
-    color: white;
+    background-color: white;
+    color: black;
     padding: 2%;
     right: 13%;
+    border: 1px solid black;
+    border-radius: 20px 20px;
     margin-top: -30px;
     z-index: 100;
 }
 
 #classcreate a {
     text-decoration: none;
-    color: white;
+    color: black;
     line-height: 2rem;
 }
 
@@ -63,7 +75,8 @@ label {
 }
 
 .mainclassinfo {
-    background: #343636;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(10, 82, 117, 1) 0%, rgba(0, 212, 255, 1) 100%, rgba(255, 255, 255, 1) 100%);
     color: white;
 }
 
@@ -87,7 +100,8 @@ a {
 }
 
 .loginjum {
-    background: #2C3A47;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(10, 82, 117, 1) 0%, rgba(0, 212, 255, 1) 100%, rgba(255, 255, 255, 1) 100%);
 }
 
 .editjub {
@@ -99,4 +113,54 @@ a {
     height: 30px;
     width: 30px;
     border-radius: 100%;
+    border: 1px solid black;
+}
+
+.profilecontainer {
+    text-align: center;
+    width: 40%;
+    margin: auto;
+    background: white;
+}
+
+.profilejum {
+    background: rgb(122, 120, 120);
+    border: 1px solid #459C98;
+    border-radius: 10px;
+}
+
+.profilejum .btn {
+    border: 1px solid #459C98;
+}
+
+.editcontainer {
+    text-align: center;
+    width: 45%;
+    margin: auto;
+    background: white;
+}
+
+.editjub {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(10, 82, 117, 1) 0%, rgba(0, 212, 255, 1) 100%, rgba(255, 255, 255, 1) 100%);
+    border: 1px solid #459C98;
+    border-radius: 10px;
+}
+
+.editjub form label {
+    display: block;
+}
+
+.editjub form input {
+    padding: 4px;
+    width: 20rem;
+    border-radius: 10px;
+}
+
+.addworkjum {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(10, 82, 117, 1) 0%, rgba(0, 212, 255, 1) 100%, rgba(255, 255, 255, 1) 100%);
+    text-align: center;
+    width: 50%;
+    margin: auto;
 }

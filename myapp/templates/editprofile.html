@@ -1,48 +1,41 @@
-{% extends 'base.html' %}
-
-{% block title %} Login {% endblock %}
-
-{% block content %}  
+{% extends 'base.html' %} <br />
+{% block title %} Login {% endblock %} <br />
+{% block content %}
 
 <style>
-#id_user
-{
-    display:none;
-}
-.profileimage
-{
+  #id_user {
+    display: none;
+  }
+  .profileimage {
     width: 140px;
-    height:140px;
-}
+    height: 140px;
+  }
 </style>
 
-<div class="container logincontainer">
+<div class="container editcontainer mt-5">
+  <div class="jumbotron editjub">
+    {% if myprofile %}
+    <div class="text-center">
+      <img
+        src="{{myprofile.myimage.url}}"
+        alt=""
+        class="profileimage mb-4"
+        style="border-radius: 100%; border: 1px solid black"
+      />
+    </div>
+    {% endif %}
+    <form action="" method="post" novalidate enctype="multipart/form-data">
+      {% csrf_token %} {% for fm in form %} {{fm.label_tag}} {{fm}}
+      {{fm.errors|striptags}} <br />
+      <br />
 
+      {% endfor %}
 
-<div class="jumbotron  editjub">
-{% if myprofile %}
-<div class='text-center'>
-    <img src="{{myprofile.myimage.url}}" alt="" class="profileimage mb-4" style="border-radius:100%; border:1px solid black;">
+      <button type="submit" class="btn btn-outline-danger text-white">
+        Change Profile
+      </button>
+    </form>
+  </div>
 </div>
-{% endif %}
-<form action="" method="post" novalidate enctype="multipart/form-data">
-{% csrf_token %}
-
-{% for fm in form %}
-
-{{fm.label_tag}} {{fm}}  {{fm.errors|striptags}}  <br> <br>
-
-{% endfor %}
-
-<button type="submit" class="btn btn-outline-danger text-white" >Change Profile</button>
-    
-</form>
-
-
-
-</div>
-</div>
-
-
 
 {% endblock %}

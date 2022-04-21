@@ -1,42 +1,35 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} <br />
+{% block title %} Login {% endblock %} <br />
 
-{% block title %} Login {% endblock %}
-
-{% block content %}  
+{% block content %}
 
 <style>
-#id_user
-{
-    display:none;
-}
-
+  #id_user {
+    display: none;
+  }
 </style>
 
-
-
-<div class="container logincontainer">
-
-{% if messages %}
+<div class="container profilecontainer">
+  {% if messages %}
   <ul class="messages list-unstyled ps-4 p-3 text-center bg-success">
     {% for message in messages %}
-      <li class="{{ message.tags }}">{{ message }}</li>
+    <li class="{{ message.tags }}">{{ message }}</li>
     {% endfor %}
   </ul>
-{% endif %}
+  {% endif %}
 
+  <div class="jumbotron profilejum mt-5">
+    <form action="" method="post" novalidate enctype="multipart/form-data">
+      {% csrf_token %} <br />
+      {% for fm in form %} {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+      <br />
 
-
-<div class="jumbotron loginjum">
-<form action="" method="post" novalidate enctype="multipart/form-data">
-{% csrf_token %}
-{% for fm in form %}
-{{fm.label_tag}} {{fm}}  {{fm.errors|striptags}}  <br> <br>
-{% endfor %}
-<button type="submit" class="btn btn-outline-danger text-white" >Change Profile</button>
-</form>
+      {% endfor %}
+      <button type="submit" class="btn btn-outline-danger text-white">
+        Change Profile
+      </button>
+    </form>
+  </div>
 </div>
-</div>
-
-
 
 {% endblock %}
