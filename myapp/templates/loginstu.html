@@ -39,20 +39,29 @@
 
       <div>
         <a href="{% url 'login' %}" class="btnteacher {{myhover}}">Teacher</a>
-        <a
-          href="{% url 'loginstudent' %}"
-          class="btnteacher {{myhover}}"
-          class="btnstudent"
-          >Student</a
-        >
+        <a href="{% url 'loginstu' %}" class="btnstudent">Student</a>
       </div>
       <br />
       <br />
-      {% for fm in form %} {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
-      <br />
-      <br />
+      <div>
+        <label>Id No:</label>
+        <input
+          type="text"
+          placeholder="Id No"
+          class="form-control"
+          name="id_no"
+        />
+      </div>
 
-      {% endfor %}
+      <div>
+        <label>Password:</label>
+        <input
+          type="text"
+          placeholder="Password"
+          class="form-control"
+          name="password"
+        />
+      </div>
 
       <button type="submit" class="btn btn-outline-danger text-white">
         Login

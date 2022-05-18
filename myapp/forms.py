@@ -6,7 +6,7 @@ from django.core import validators
 from django.utils.translation import ugettext, ugettext_lazy as _
 from myapp import models
 from django.contrib.auth import password_validation
-from myapp.models import CreateClass, AddClassWork, ProfileClass, Question, Course
+from myapp.models import CreateClass, AddClassWork, ProfileClass, Question, Course, StudentRegister
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 
 
@@ -120,3 +120,10 @@ class AddQuestionForm(forms.ModelForm):
         model = Question
         fields = ['question', 'option1',
                   'option2', 'option3', 'option4',  'answer']
+
+
+class StudentRegisterForm(forms.ModelForm):
+    class Meta:
+        model = StudentRegister
+        fields = ['student_id', 'student_name',
+                  'student_email', 'student_password', 'student_cpassword']

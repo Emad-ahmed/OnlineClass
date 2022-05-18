@@ -37,15 +37,6 @@
     <form action="" method="post" novalidate>
       {% csrf_token %}
 
-      <div>
-        <a href="{% url 'login' %}" class="btnteacher {{myhover}}">Teacher</a>
-        <a
-          href="{% url 'loginstudent' %}"
-          class="btnteacher {{myhover}}"
-          class="btnstudent"
-          >Student</a
-        >
-      </div>
       <br />
       <br />
       {% for fm in form %} {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
@@ -55,7 +46,7 @@
       {% endfor %}
 
       <button type="submit" class="btn btn-outline-danger text-white">
-        Login
+        Register
       </button>
 
       <small><a href="{% url 'password_reset' %}">Forgot Password ?</a></small>

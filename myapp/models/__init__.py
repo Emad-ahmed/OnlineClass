@@ -5,3 +5,4 @@ from myapp.models.mycomment import CommentinClass
 from myapp.models.myworkdone import WorkdoneClass
 from myapp.models.myprofile import ProfileClass
 from myapp.models.examquestion import Course, Question, Result
+from myapp.models.studentlogin import StudentRegister
