@@ -43,9 +43,9 @@ class Studentre(View):
 
     def post(self, request):
         fm = StudentRegisterForm(request.POST)
-        return render(request, 'student-register', {'form': fm})
+        return render(request, 'student-register.html', {'form': fm})
 
 
 class LoginstudentView(View):
     def get(self, request):
-        return render(request, 'loginstu.html')
+        return render(request, 'loginstu.html', {'myhover': 'active'})

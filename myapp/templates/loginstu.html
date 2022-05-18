@@ -1,6 +1,6 @@
 {% extends 'base.html' %} <br />
 
-{% block title %} Login {% endblock %} <br />
+{% block title %} Login Student {% endblock %} <br />
 
 {% block content %}
 <style>
@@ -38,8 +38,10 @@
       {% csrf_token %}
 
       <div>
-        <a href="{% url 'login' %}" class="btnteacher {{myhover}}">Teacher</a>
-        <a href="{% url 'loginstu' %}" class="btnstudent">Student</a>
+        <a href="{% url 'login' %}" class="btnteacher">Teacher</a>
+        <a href="{% url 'loginstudent' %}" class="btnstudent {{myhover}}"
+          >Student</a
+        >
       </div>
       <br />
       <br />

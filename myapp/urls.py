@@ -4,7 +4,7 @@ from myapp.views import HomeView
 from django.urls import path
 from django.contrib import auth
 from myapp.forms import MyPasswordResetForm, MySetPasswordForm
-from myapp.views import HomeView, SignupView, LoginView, userlogout, CreateView, JoinView, AddclassView, ShowClassworkView, JoinclassView, deletecreateclass, deletejoinclass, AddclassworknewView, pdf_view, mybestcomment, myworkdone, ProfileView, deletemyworkname, editprofile, AssignmentView, PresentationView, ExamInfoView, AddQuizView, Add_Quiz_Question_View, Studentre
+from myapp.views import HomeView, SignupView, LoginView, userlogout, CreateView, JoinView, AddclassView, ShowClassworkView, JoinclassView, deletecreateclass, deletejoinclass, AddclassworknewView, pdf_view, mybestcomment, myworkdone, ProfileView, deletemyworkname, editprofile, AssignmentView, PresentationView, ExamInfoView, AddQuizView, Add_Quiz_Question_View, Studentre, LoginstudentView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -37,6 +37,9 @@ urlpatterns = [
 
     path('student_registration',
          Studentre.as_view(), name='student_registration'),
+    path('loginstudent',
+         LoginstudentView.as_view(), name='loginstudent'),
+
 
     # Password Reset
     path('password-reset/',
