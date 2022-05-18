@@ -1,5 +1,34 @@
-{% extends 'base.html' %} {% block title %} Signup {% endblock %} {% block
-content %}
+{% extends 'base.html' %} <br />
+
+{% block title %} Signup {% endblock %}<br />
+{% block content %}
+
+<style>
+  .btnteacher {
+    background: white;
+    padding: 7px;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    border: 1px solid black;
+    color: black;
+  }
+  .btnstudent {
+    background: white;
+    padding: 7px;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    border: 1px solid black;
+    color: black;
+  }
+  .active {
+    background: tomato;
+    color: white;
+  }
+  .logdiv {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+</style>
 
 <div class="container signupcontainer">
   {% if messages %}
@@ -9,11 +38,9 @@ content %}
     {% endfor %}
   </ul>
   {% endif %}
-  <div>
-    <a href="{% url 'login' %}" class="btnteacher">Teacher</a>
-    <a href="{% url 'loginstudent' %}" class="btnstudent {{myhover}}"
-      >Student</a
-    >
+  <div class="logdiv">
+    <a href="{% url 'signup' %}" class="btnteacher {{myhover}}">Teacher</a>
+    <a href="{% url 'student_registration' %}" class="btnstudent">Student</a>
   </div>
   <div class="jumbotron loginjum">
     <form action="" method="post" novalidate>

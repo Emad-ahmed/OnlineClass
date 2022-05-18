@@ -127,3 +127,11 @@ class StudentRegisterForm(forms.ModelForm):
         model = StudentRegister
         fields = ['student_id', 'student_name',
                   'student_email', 'student_password', 'student_cpassword']
+        labels = {'student_cpassword': 'student confirm password'}
+        widgets = {
+            'student_id': forms.NumberInput(attrs={'class': 'form-control'}),
+            'student_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'student_email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'student_password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'student_cpassword': forms.PasswordInput(attrs={'class': 'form-control'}),
+        }

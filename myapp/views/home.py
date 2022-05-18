@@ -13,20 +13,17 @@ from django.contrib import messages
 
 class HomeView(View):
     def get(self, request):
-        if request.user.is_authenticated:
-            my = request.session.get('myteacher')
-            myallclass = CreateClass.objects.filter(user=request.user)
-            newclass = JoinClass.objects.filter(user=request.user)
-            addmyclass = AddClassWork.objects.filter(
-                myclass__user=request.user).last()
-            try:
-                myprofile = ProfileClass.objects.get(user=request.user)
-            except:
-                return render(request, 'home.html', {'allclass': myallclass, 'newclass': newclass, 'addmyclass': addmyclass, 'my': my})
-            return render(request, 'home.html', {'allclass': myallclass, 'newclass': newclass, 'addmyclass': addmyclass, 'my': my, 'myprofile': myprofile})
 
-        else:
-            return HttpResponseRedirect('login')
+        my = request.session.get('myteacher')
+        myallclass = CreateClass.objects.filter(user=request.user)
+        newclass = JoinClass.objects.filter(user=request.user)
+        addmyclass = AddClassWork.objects.filter(
+            myclass__user=request.user).last()
+        try:
+            myprofile = ProfileClass.objects.get(user=request.user)
+        except:
+            return render(request, 'home.html', {'allclass': myallclass, 'newclass': newclass, 'addmyclass': addmyclass, 'my': my})
+        return render(request, 'home.html', {'allclass': myallclass, 'newclass': newclass, 'addmyclass': addmyclass, 'my': my, 'myprofile': myprofile})
 
 
 class JoinView(View):

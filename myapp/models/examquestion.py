@@ -1,6 +1,8 @@
+import imp
 from django.db import models
 from django.contrib.auth.models import User
 from myapp.models.classname import CreateClass
+from myapp.models.studentlogin import StudentRegister
 
 
 class Course(models.Model):
@@ -23,7 +25,8 @@ class Question(models.Model):
 
 
 class Result(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    student_user = models.ForeignKey(
+        StudentRegister, on_delete=models.CASCADE, blank=True, null=True)
     exam = models.ForeignKey(Course, on_delete=models.CASCADE)
     marks = models.PositiveIntegerField()
     date = models.DateTimeField(auto_now=True)

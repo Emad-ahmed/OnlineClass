@@ -1,8 +1,8 @@
 {% extends 'base.html' %} <br />
 
-{% block title %} Login {% endblock %} <br />
-
+{% block title %} Signup {% endblock %}<br />
 {% block content %}
+
 <style>
   .btnteacher {
     background: white;
@@ -24,23 +24,30 @@
     background: tomato;
     color: white;
   }
+  .logdiv {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 </style>
-<div class="container logincontainer">
+
+<div class="container signupcontainer">
   {% if messages %}
-  <ul class="messages list-unstyled ps-4 p-3 text-center bg-success">
+  <ul class="messages list-unstyled ps-4 p-3 text-center bg-warning">
     {% for message in messages %}
     <li class="{{ message.tags }}">{{ message }}</li>
     {% endfor %}
   </ul>
   {% endif %}
+  <div class="logdiv">
+    <a href="{% url 'signup' %}" class="btnteacher">Teacher</a>
+    <a href="{% url 'student_registration' %}" class="btnstudent {{myhover}}"
+      >Student</a
+    >
+  </div>
   <div class="jumbotron loginjum">
     <form action="" method="post" novalidate>
-      {% csrf_token %}
-
-      <br />
-      <br />
-      {% for fm in form %} {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
-      <br />
+      {% csrf_token %} {% for fm in form %} {{fm.label_tag}} {{fm}}
+      {{fm.errors|striptags}} <br />
       <br />
 
       {% endfor %}
@@ -48,8 +55,6 @@
       <button type="submit" class="btn btn-outline-danger text-white">
         Register
       </button>
-
-      <small><a href="{% url 'password_reset' %}">Forgot Password ?</a></small>
     </form>
   </div>
 </div>

@@ -42,7 +42,7 @@ def userlogout(request):
 class Studentre(View):
     def get(self, request):
         fm = StudentRegisterForm()
-        return render(request, 'student-register.html', {'form': fm})
+        return render(request, 'student-register.html', {'form': fm, 'myhover': 'active'})
 
     def post(self, request):
         fm = StudentRegisterForm(request.POST)
@@ -55,7 +55,7 @@ class Studentre(View):
             obj.student_password = mypassword
             obj.student_cpassword = mypassword1
             obj.save()
-        return render(request, 'student-register.html', {'form': fm})
+        return render(request, 'student-register.html', {'form': fm, 'myhover': 'active'})
 
 
 class LoginstudentView(View):
@@ -69,17 +69,17 @@ class LoginstudentView(View):
         student_id = request.POST.get('id_no')
         password = request.POST.get('password')
 
-        student = StudentRegister.get_student_by_email(student_id)
+        student = StudentRegister.get_student_by_id(student_id)
 
         if student:
-            flag = check_password(password, student.password)
+            flag = check_password(password, student.student_password)
             if flag:
-                request.session['studeent'] = student.id
-                if LoginView.return_url:
+                request.session['student'] = student.id
+                if LoginstudentView.return_url:
                     return HttpResponseRedirect(LoginView.return_url)
                 else:
-                    LoginView.return_url = None
-                    return redirect('home')
+                    LoginstudentView.return_url = None
+                    return redirect('/')
             else:
                 error_message = 'Id no or Password invalid !!'
         else:

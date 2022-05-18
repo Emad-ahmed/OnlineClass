@@ -8,7 +8,7 @@ from django.contrib import messages
 class SignupView(View):
     def get(self, request):
         fm = SignForm()
-        return render(request, 'signup.html', {'form': fm})
+        return render(request, 'signup.html', {'form': fm, 'myhover': 'active'})
 
     def post(self, request):
         fm = SignForm(request.POST)
@@ -16,4 +16,4 @@ class SignupView(View):
             messages.success(request, 'Saved  successfully!')
             fm.save()
 
-        return render(request, 'signup.html', {'form': fm})
+        return render(request, 'signup.html', {'form': fm, 'myhover': 'active'})
