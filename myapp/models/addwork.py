@@ -20,8 +20,8 @@ class AddClassWork(models.Model):
     document = models.FileField(upload_to='documents/', blank=True)
     current_date = models.DateTimeField(
         auto_now_add=True,  blank=True)
-    end_date_time = models.DateTimeField(
-        blank=True)
+    end_date_time = models.DateTimeField(auto_now_add=True,
+                                         blank=True)
 
     def __str__(self):
         return self.myclass.class_name

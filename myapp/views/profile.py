@@ -17,6 +17,7 @@ class ProfileView(View):
         if request.user.is_authenticated:
             fm = ProfileForm()
             my = request.session.get('myteacher')
+            student = request.session.get("student")
             try:
                 myprofile = ProfileClass.objects.get(user=request.user)
             except:
