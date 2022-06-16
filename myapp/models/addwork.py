@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from myapp.models import CreateClass
+from myapp.models import CreateClass, JoinClass
 from datetime import datetime
 
 Choice_Type = (
@@ -11,7 +11,10 @@ Choice_Type = (
 
 
 class AddClassWork(models.Model):
-    myclass = models.ForeignKey(CreateClass, on_delete=models.CASCADE)
+    myclass = models.ForeignKey(
+        CreateClass, on_delete=models.CASCADE, blank=True, null=True)
+    student_class = models.ForeignKey(
+        JoinClass, on_delete=models.CASCADE, blank=True, null=True)
     mytopic = models.CharField(
         max_length=20, choices=Choice_Type, default='Presentation')
     title = models.TextField(max_length=100, default="none")

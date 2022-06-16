@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django import forms
 from django.forms import fields, widgets
 from django.core import validators
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from myapp import models
 from django.contrib.auth import password_validation
 from myapp.models import CreateClass, AddClassWork, ProfileClass, Question, Course, StudentRegister

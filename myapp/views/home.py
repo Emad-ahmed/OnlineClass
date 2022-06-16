@@ -66,32 +66,55 @@ class JoinView(View):
             return render(request, 'joinclass.html', {'myprofile': myprofile, 'my': my})
 
     def post(self, request):
+        student = request.session.get("student")
+        myteach = request.user.is_anonymous
         my = request.session.get('myteacher')
         joinclass = request.POST.get('joinclass')
-        try:
-            newclass = CreateClass.objects.get(classcode=joinclass)
-        except:
-            messages.success(request, "Enter Correct Classcode")
-            return HttpResponseRedirect('/joinclass')
+        if not myteach:
+            try:
+                newclass = CreateClass.objects.get(classcode=joinclass)
+            except:
+                messages.success(request, "Enter Correct Classcode")
+                return HttpResponseRedirect('/joinclass')
 
-        myjoin = JoinClass(user=request.user, createclass=newclass)
+            myjoin = JoinClass(user=request.user, createclass=newclass)
 
-        alljoinclass = JoinClass.objects.filter(user=request.user)
+            alljoinclass = JoinClass.objects.filter(user=request.user)
 
-        mycreateclass = CreateClass.objects.filter(user=request.user)
+            mycreateclass = CreateClass.objects.filter(user=request.user)
 
-        for myclass in alljoinclass:
-            if myclass.createclass.classcode == joinclass:
-                messages.success(request, "Class Already Exists")
-                return HttpResponseRedirect("/joinclass")
+            for myclass in alljoinclass:
+                if myclass.createclass.classcode == joinclass:
+                    messages.success(request, "Class Already Exists")
+                    return HttpResponseRedirect("/joinclass")
 
-        for myclass in mycreateclass:
-            if myclass.classcode == joinclass:
-                messages.success(request, "Class Already Exists")
-                return HttpResponseRedirect("/joinclass")
+            for myclass in mycreateclass:
+                if myclass.classcode == joinclass:
+                    messages.success(request, "Class Already Exists")
+                    return HttpResponseRedirect("/joinclass")
 
-        myjoin.save()
-        return HttpResponseRedirect('/')
+            myjoin.save()
+            return HttpResponseRedirect('/')
+
+        elif myteach:
+            try:
+                st = StudentRegister.objects.get(pk=student)
+                newclass = CreateClass.objects.get(classcode=joinclass)
+            except:
+                messages.success(request, "Enter Correct Classcode")
+                return HttpResponseRedirect('/joinclass')
+
+            myjoin = JoinClass(student_user=st, createclass=newclass)
+
+            alljoinclass = JoinClass.objects.filter(student_user=st)
+
+            for myclass in alljoinclass:
+                if myclass.createclass.classcode == joinclass:
+                    messages.success(request, "Class Already Exists")
+                    return HttpResponseRedirect("/joinclass")
+
+            myjoin.save()
+            return HttpResponseRedirect('/')
 
 
 def deletecreateclass(request, id):

@@ -7,12 +7,16 @@ from django.views import View
 from myapp.forms import CreateClassForm, AddClassWorkForm
 from myapp.models import CreateClass, JoinClass, AddClassWork, joinclass, CommentinClass, WorkdoneClass, ProfileClass
 from django.core.files.storage import FileSystemStorage
+
+from myapp.models.studentlogin import StudentRegister
 # Create your views here.
 
 
 class AddclassView(View):
     def get(self, request, id):
-        if request.user.is_authenticated:
+        student = request.session.get("student")
+        myteach = request.user.is_anonymous
+        if not myteach:
             request.session['myid'] = id
             myclass = CreateClass.objects.get(pk=id)
             classcode = myclass.classcode
@@ -31,8 +35,20 @@ class AddclassView(View):
                 return render(request, 'addclasswork.html', {'addclass': addclass, 'myclass': myclass, 'myname': myname, 'myjoinclass': myjoinclass})
 
             return render(request, 'addclasswork.html', {'addclass': addclass, 'myclass': myclass, 'myname': myname, 'myjoinclass': myjoinclass, 'myprofile': myprofile})
-        else:
-            return HttpResponseRedirect("/")
+        elif myteach:
+            student_class = StudentRegister.objects.get(id=student)
+            myclass = JoinClass.objects.get(student_user=student_class)
+            classcode = myclass.createclass.classcode
+            myjoinclass = JoinClass.objects.filter(
+                createclass__classcode=classcode)
+
+            try:
+                myprofile = ProfileClass.objects.get(
+                    student_user=student_class)
+            except:
+                return render(request, 'addclasswork.html', {'myclass': myclass,  'myjoinclass': myjoinclass})
+
+            return render(request, 'addclasswork.html', {'myclass': myclass,  'myjoinclass': myjoinclass, 'myprofile': myprofile})
 
 
 class JoinclassView(View):
